@@ -1,6 +1,7 @@
 """Token ledger per team with soft-limit downgrade and hard-limit block."""
 from collections import defaultdict
 
+
 class BudgetExceeded(Exception):
     pass
 

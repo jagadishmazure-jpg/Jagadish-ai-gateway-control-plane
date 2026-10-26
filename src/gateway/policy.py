@@ -1,6 +1,7 @@
 """Per-team policy: model allow/deny, MCP tool allow-list, token budgets, downgrade path."""
 from dataclasses import dataclass, field
 
+
 @dataclass
 class TeamPolicy:
     team: str

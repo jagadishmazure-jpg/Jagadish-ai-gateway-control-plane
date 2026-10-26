@@ -1,6 +1,8 @@
 """Minimal span recorder shaped after the OpenTelemetry GenAI semantic conventions
 (gen_ai.* attribute names). Exports JSONL offline; swap for the OTel SDK in production."""
-import time, uuid
+import time
+import uuid
+
 
 class Tracer:
     def __init__(self):

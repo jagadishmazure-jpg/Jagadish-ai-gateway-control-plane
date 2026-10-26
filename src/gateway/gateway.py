@@ -3,6 +3,7 @@
 Request pipeline: identity -> safety -> PII redaction -> model allow/deny -> routing ->
 budget (downgrade/block) -> cache -> provider with fallback -> audit + span."""
 from dataclasses import dataclass
+
 from .audit import AuditLog
 from .budget import BudgetExceeded, Ledger
 from .cache import SemanticCache
@@ -11,6 +12,7 @@ from .providers import MockProvider, cost
 from .router import Router, classify_task
 from .safety import classify, redact
 from .telemetry import Tracer
+
 
 @dataclass
 class Request:
