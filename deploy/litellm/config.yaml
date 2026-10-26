@@ -1,0 +1,22 @@
+# LiteLLM proxy config (WRITTEN, NOT RUN in this repo). Placeholders only; keys come from env.
+# Mirrors the lab policy: per-team virtual keys with budgets, fallbacks, PII masking guardrail, OTel callback.
+model_list:
+  - model_name: small
+    litellm_params: {model: "openai/REPLACE_SMALL_MODEL", api_key: "os.environ/SMALL_API_KEY"}
+  - model_name: large
+    litellm_params: {model: "openai/REPLACE_LARGE_MODEL", api_key: "os.environ/LARGE_API_KEY"}
+  - model_name: selfhosted
+    litellm_params: {model: "hosted_vllm/REPLACE_OPEN_MODEL", api_base: "http://vllm.internal:8000/v1"}
+router_settings:
+  fallbacks: [{"large": ["small", "selfhosted"]}]
+  num_retries: 2
+litellm_settings:
+  callbacks: ["otel"]
+  cache: true
+  cache_params: {type: "redis-semantic", similarity_threshold: 0.9}
+guardrails:
+  - guardrail_name: pii-mask
+    litellm_params: {guardrail: presidio, mode: pre_call}
+general_settings:
+  master_key: "os.environ/LITELLM_MASTER_KEY"
+# Teams/budgets are created via the admin API, e.g. POST /team/new {"team_alias":"engineering","max_budget":50,"models":["small","selfhosted"]}

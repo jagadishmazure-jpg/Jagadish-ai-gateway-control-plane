@@ -1,0 +1,18 @@
+# Kong declarative config sketch (WRITTEN, NOT RUN). Plugin names per Kong AI Gateway docs; verify against your Kong version.
+_format_version: "3.0"
+services:
+  - name: llm
+    url: http://placeholder.invalid
+    routes: [{name: chat, paths: ["/v1/chat"]}]
+    plugins:
+      - name: ai-proxy
+        config: {route_type: llm/v1/chat, model: {provider: openai, name: REPLACE_MODEL}, auth: {header_name: Authorization, header_value: "{vault://env/LLM_KEY}"}}
+      - name: ai-prompt-guard
+        config: {deny_patterns: [".*make a bomb.*", ".*ransomware.*"]}
+      - name: ai-rate-limiting-advanced
+        config: {llm_providers: [{name: openai, limit: [50000], window_size: [2592000]}]}
+      - name: opentelemetry
+        config: {endpoint: "http://otel-collector:4318/v1/traces"}
+consumers:
+  - username: team-engineering
+  - username: team-finance

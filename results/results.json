@@ -1,0 +1,46 @@
+{
+  "label": "SIMULATED: synthetic prompts, mock providers, illustrative prices",
+  "sample": "2,000 synthetic requests, 3 teams, seed 42; routing evals on 800 separate prompts",
+  "metrics": {
+    "Requests": 2000,
+    "Served": 1819,
+    "Blocked by content safety": 47,
+    "Blocked by hard budget": 134,
+    "Downgraded by soft budget": 36,
+    "Requests with PII redacted": 97,
+    "Semantic cache hit rate": "42.4%",
+    "Accuracy, gateway (synthetic)": "93.5%",
+    "Accuracy, always-large baseline (synthetic)": "94.0%",
+    "Illustrative cost, gateway (USD)": "0.1026",
+    "Illustrative cost, always-large baseline (USD)": "0.2699",
+    "Cost reduction vs baseline": "62.0%",
+    "Audit chain verified": true,
+    "OTel-style spans emitted": 2000
+  },
+  "routing_eval_table": {
+    "code": {
+      "mock-small": 0.655,
+      "mock-medium": 0.8,
+      "mock-large": 0.905,
+      "mock-selfhosted": 0.755
+    },
+    "extract": {
+      "mock-small": 0.865,
+      "mock-medium": 0.9,
+      "mock-large": 0.96,
+      "mock-selfhosted": 0.89
+    },
+    "faq": {
+      "mock-small": 0.955,
+      "mock-medium": 0.945,
+      "mock-large": 0.965,
+      "mock-selfhosted": 0.92
+    },
+    "reason": {
+      "mock-small": 0.5,
+      "mock-medium": 0.75,
+      "mock-large": 0.92,
+      "mock-selfhosted": 0.7
+    }
+  }
+}

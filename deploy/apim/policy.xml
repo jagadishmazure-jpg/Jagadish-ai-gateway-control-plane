@@ -1,0 +1,20 @@
+<!-- Azure API Management AI gateway inbound policy (WRITTEN, NOT RUN; nothing deployed).
+     Policy names per Microsoft Learn "AI gateway capabilities"; check attributes for your API version. -->
+<policies>
+  <inbound>
+    <base />
+    <validate-azure-ad-token tenant-id="{{tenant-id}}" />
+    <llm-token-limit counter-key="@(context.Request.Headers.GetValueOrDefault("x-team","none"))"
+                     token-quota="5000" token-quota-period="Monthly" estimate-prompt-tokens="true" />
+    <llm-content-safety backend-id="content-safety-backend" shield-prompt="true" />
+    <llm-semantic-cache-lookup score-threshold="0.1" embeddings-backend-id="embeddings-backend" />
+    <llm-emit-token-metric namespace="ai-gateway">
+      <dimension name="Team" value="@(context.Request.Headers.GetValueOrDefault("x-team","none"))" />
+    </llm-emit-token-metric>
+    <set-backend-service backend-id="llm-pool" />
+  </inbound>
+  <outbound>
+    <llm-semantic-cache-store duration="300" />
+    <base />
+  </outbound>
+</policies>
