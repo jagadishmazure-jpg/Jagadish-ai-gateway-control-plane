@@ -1,16 +1,20 @@
 """Regenerate the README results block from a real run (results/*.json + live pytest count).
 
 --check fails if the committed README differs from what a fresh run produces."""
-import json, pathlib, subprocess, sys
+import json
+import pathlib
+import subprocess
+import sys
+
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from count_tests import run  # noqa: E402
+from count_tests import run
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN GENERATED -->", "<!-- END GENERATED -->"
 
 def block():
     subprocess.run([sys.executable, "scripts/run_eval.py"], cwd=ROOT, check=True, capture_output=True)
-    rc, passed, failed, _ = run()
+    rc, passed, _failed, _ = run()
     if rc != 0:
         sys.exit("tests failed")
     res = json.loads((ROOT / "results" / "results.json").read_text())

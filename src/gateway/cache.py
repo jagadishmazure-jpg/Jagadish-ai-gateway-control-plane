@@ -2,7 +2,9 @@
 
 Scoped per team so one team's cached answer is never served to another.
 """
-import math, re, hashlib
+import hashlib
+import math
+import re
 
 DIM = 512
 STOP = {"the", "a", "an", "is", "of", "to", "for", "what", "how", "do", "i", "my", "please", "can", "you"}

@@ -2,6 +2,7 @@
 measured accuracy on the offline eval set is within `tolerance` of the best model."""
 from .providers import CATALOG, MockProvider
 
+
 def run_evals(eval_set: list[dict], provider: MockProvider) -> dict:
     """Returns {task: {model: accuracy}} measured on the eval set."""
     table: dict = {}

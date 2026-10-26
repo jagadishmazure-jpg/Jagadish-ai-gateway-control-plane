@@ -2,8 +2,9 @@
 
 Prices are ILLUSTRATIVE lab values (USD per 1M tokens), not vendor quotes.
 """
-from dataclasses import dataclass
 import hashlib
+from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class Model:

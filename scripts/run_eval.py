@@ -1,12 +1,15 @@
 """SIMULATED run: synthetic prompts + mock providers. Writes results/results.json."""
-import json, pathlib, sys
+import json
+import pathlib
+import sys
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gateway.gateway import Gateway, Request  # noqa: E402
-from gateway.policy import PolicyStore, TeamPolicy  # noqa: E402
-from gateway.providers import CATALOG, MockProvider, cost  # noqa: E402
-from gateway.router import Router, classify_task, run_evals  # noqa: E402
-from gateway.workload import make_set, make_workload  # noqa: E402
+from gateway.gateway import Gateway, Request
+from gateway.policy import PolicyStore, TeamPolicy
+from gateway.providers import CATALOG, MockProvider, cost
+from gateway.router import Router, classify_task, run_evals
+from gateway.workload import make_set, make_workload
 
 ALL = set(CATALOG)
 def policies():

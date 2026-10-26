@@ -1,4 +1,5 @@
 import pytest
+
 from gateway.audit import AuditLog
 from gateway.budget import BudgetExceeded, Ledger
 from gateway.cache import SemanticCache

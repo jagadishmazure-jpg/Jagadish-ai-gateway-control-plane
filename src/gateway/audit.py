@@ -1,6 +1,10 @@
 """Tamper-evident audit log: each record carries an HMAC over (previous mac + record).
 Identity fields are pseudonymised with a keyed HMAC (key from env in production)."""
-import hashlib, hmac, json, os
+import hashlib
+import hmac
+import json
+import os
+
 
 class AuditLog:
     def __init__(self, key: bytes | None = None):
